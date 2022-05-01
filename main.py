@@ -5,12 +5,13 @@ TOKEN = ''
 items = []  # global list to store the user's searches
 intents = discord.Intents.all()
 intents.members = True
-client = commands.Bot(command_prefix ='!', intents=intents)
+client = commands.Bot(command_prefix='!', intents=intents)
 text_channel_list = []
 
 
 @client.event
 async def on_ready():
+    """Default function from Discord API"""
     print('We have logged in as {0.user}'.format(client))
     for guild in client.guilds:
         for channel in guild.text_channels:
@@ -22,6 +23,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    """Default function from Discord API"""
     username = str(message.author).split('#')[0]
     user_message = str(message.content)
     channel = str(message.channel.name)
@@ -84,7 +86,8 @@ async def price(ctx):
             elif '$' in line:
                 if '$' in content[i + 1].strip():
                     cost += float(content[i + 1][1:])
-                    result.append(content[i + 1].strip() + ' (' + content[i + 2].strip() + ")")
+                    result.append(content[i + 1].strip() +
+                                  ' (' + content[i + 2].strip() + ")")
                 else:
                     cost += float(content[i][1:])
                     result.append(line)
@@ -93,27 +96,28 @@ async def price(ctx):
         if not result:  # when no such item is found
             await ctx.send('Invalid Search')
         else:  # output its corresponding information
-            await ctx.send(result[1] + ' --- stock: ' + result[0] + ' --- price: ' + result[2])
+            await ctx.send(result[1] + ' --- stock: ' + result[0]
+                           + ' --- price: ' + result[2])
     await ctx.send('Total Cost: $' + str(cost))  # output total cost
 
 
 @client.command()
-async def help(ctx):
+async def instructions(ctx):
     """ Command to get the description and demo of all the other commands.
     """
-    await ctx.send('!add:'
-                   'search and add computer parts to cart'
-                   '> !add'
-                   'Please enter your item:'
-                   '> RTX 2080'
-                   'Added to list: RTX 2080'
-                   ''
-                   '!price:'
-                   'get price and available stocks for all the items in the cart.'
-                   'The PriceTracker bot will also output the total cost of all the items.'
-                   '> !price'
-                   'EK-Vector RTX 2080 Ti RGB - Nickel + Plexi --- stock: 0 - -- price: $249.99'
-                   'Total Cost: $249.99')
+    await ctx.send('!add:\n'
+                   'search and add computer parts to cart\n'
+                   '> !add\n'
+                   'Please enter your item:\n'
+                   '> RTX 2080\n'
+                   'Added to list: RTX 2080\n'
+                   '\n'
+                   '!price:\n'
+                   'get price and available stocks for all the items in the cart.\n'
+                   'The PriceTracker bot will also output the total cost of all the items.\n'
+                   '> !price\n'
+                   'EK-Vector RTX 2080 Ti RGB - Nickel + Plexi --- stock: 0 - -- price: $249.99\n'
+                   'Total Cost: $249.99\n')
 
 
 client.run(TOKEN)
