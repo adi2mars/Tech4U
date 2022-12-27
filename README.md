@@ -2,6 +2,7 @@
 An innovative discord bot that implements web scrapping with UIPath software and allows you to keep track of the prices and stocks of your most desired tech products.
 Created by Aditya Kumar, Dev Patel, Ishaan Jamdar, Ryan Reza
 
+[![hackathon video thumbnail](https://img.youtube.com/vi/sm0VDusdd2E/0.jpg)](https://www.youtube.com/watch?v=sm0VDusdd2E&feature=emb_title&ab_channel=AdityaKumar)
 
 
 
